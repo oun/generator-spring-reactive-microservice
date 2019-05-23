@@ -1,6 +1,10 @@
 const Generator = require('yeoman-generator');
 
 module.exports = class extends Generator {
+    initializing() {
+        this.props = {};
+    }
+
     async prompting() {
         this.props = await this.prompt([
             {
@@ -65,21 +69,21 @@ module.exports = class extends Generator {
             }
         );
         this.fs.copyTpl(
-            this.templatePath('src/main/java/Application.java'),
+            this.templatePath('src/main/java/package/Application.java'),
             this.destinationPath(`src/main/java/${packageDir}/Application.java`),
             {
                 package: this.props.package
             }
         );
         this.fs.copyTpl(
-            this.templatePath('src/main/java/config/AuditingConfig.java'),
+            this.templatePath('src/main/java/package/config/AuditingConfig.java'),
             this.destinationPath(`src/main/java/${packageDir}/config/AuditingConfig.java`),
             {
                 package: this.props.package
             }
         );
         this.fs.copyTpl(
-            this.templatePath('src/main/java/config/SwaggerConfig.java'),
+            this.templatePath('src/main/java/package/config/SwaggerConfig.java'),
             this.destinationPath(`src/main/java/${packageDir}/config/SwaggerConfig.java`),
             {
                 package: this.props.package
