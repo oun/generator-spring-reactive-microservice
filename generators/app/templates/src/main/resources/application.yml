@@ -5,7 +5,7 @@ spring:
     name: <%= name %>
   data:
     mongodb:
-      uri: mongodb://localhost:27017/shop?replicaSet=replicaset
+      uri: mongodb://localhost:27017/<%= dbname %>
 logging:
   level:
     root: info
