@@ -84,6 +84,10 @@ typings/
 .dynamodb/
 
 # IDE
-.idea/
+.idea
+*.iws
+*.iml
+*.ipr
+/out/
 
 dist/

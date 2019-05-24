@@ -1,0 +1,12 @@
+server:
+  port: <%= port %>
+spring:
+  application:
+    name: <%= name %>
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/<%= dbname %>
+logging:
+  level:
+    root: info
+    org.springframework: info
