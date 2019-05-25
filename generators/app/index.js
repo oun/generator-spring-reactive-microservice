@@ -154,7 +154,7 @@ module.exports = class extends Generator {
             this.destinationPath(`gradle/wrapper/gradle-wrapper.properties`)
         );
         this.fs.copy(
-            this.templatePath('.gitignore'),
+            this.templatePath('gitignore'),
             this.destinationPath('.gitignore')
         );
         if (this.props.scaffold) {
