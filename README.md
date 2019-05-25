@@ -1,7 +1,22 @@
 # Generator Spring Reactive Microservice
 
-TODO
+Yeoman generator for creating Spring Reactive Microservice connecting to Mongodb.
+
+## Technology
+
+- Spring WebFlux
+- Mapstruct
+- Swagger
+- Mongodb
+
+## Installation
+```
+npm install -g yo
+npm install -g generator-spring-reactive-microservice
+```
 
 ## Running
 
-TODO
+```
+$ yo spring-reactive-microservice myapp
+```
