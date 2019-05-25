@@ -57,6 +57,13 @@ module.exports = class extends Generator {
             }
         );
         this.fs.copyTpl(
+            this.templatePath('src/main/java/package/controller/ErrorHandler.java'),
+            this.destinationPath(`src/main/java/${packageDir}/controller/ErrorHandler.java`),
+            {
+                package: this.props.package
+            }
+        );
+        this.fs.copyTpl(
             this.templatePath('src/main/java/package/service/_Service.java'),
             this.destinationPath(`src/main/java/${packageDir}/service/${service}.java`),
             {
@@ -93,6 +100,13 @@ module.exports = class extends Generator {
             {
                 package: this.props.package,
                 dto: this.props.dto
+            }
+        );
+        this.fs.copyTpl(
+            this.templatePath('src/main/java/package/model/dto/ErrorDto.java'),
+            this.destinationPath(`src/main/java/${packageDir}/model/dto/ErrorDto.java`),
+            {
+                package: this.props.package
             }
         );
         this.fs.copyTpl(
