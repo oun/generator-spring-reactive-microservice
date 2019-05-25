@@ -9,6 +9,7 @@
   "author": "Worawat Wijarn",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.11",
     "yeoman-generator": "^4.0.0"
   }
 }

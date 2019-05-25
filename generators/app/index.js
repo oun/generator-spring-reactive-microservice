@@ -39,6 +39,10 @@ module.exports = class extends Generator {
         ]);
     }
 
+    configuring() {
+        this.config.set('package', this.props.group + '.' + this.props.name.toLowerCase());
+    }
+
     writing() {
         this.props.package = this.props.group + '.' + this.props.name.toLowerCase();
         const packageDir = this.props.package.replace('.', '/');

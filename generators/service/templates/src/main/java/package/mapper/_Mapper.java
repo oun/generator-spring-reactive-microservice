@@ -8,16 +8,13 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface <%= entity %>Mapper {
+public interface <%= mapper %> {
     <%= entity %>Mapper INSTANCE = Mappers.getMapper(<%= entity %>Mapper.class);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdBy", source = "creator")
-    @Mapping(target = "lastModifiedBy", source = "creator")
-    <%= entity %> mapTo<%= entity %>(<%= dto %> dto, String creator);
+    <%= entity %> mapTo<%= entity %>(<%= dto %> dto);
     <%= dto %> mapTo<%= dto %>(<%= entity %> entity);
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "lastModifiedBy", source = "updater")
-    void mapTo<%= entity %>(<%= dto %> shop, String updater, @MappingTarget <%= entity %> entity);
+    void mapTo<%= entity %>(<%= dto %> dto, @MappingTarget <%= entity %> entity);
 }
