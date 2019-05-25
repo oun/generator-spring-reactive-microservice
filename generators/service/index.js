@@ -13,19 +13,22 @@ module.exports = class extends Generator {
             {
                 type: 'input',
                 name: 'entity',
-                message: 'Entity:'
+                message: 'Entity:',
+                validate: value => !!value
             },
             {
                 type: 'input',
                 name: 'path',
                 message: 'Api path:',
-                default: props => `/${_.kebabCase(props.entity)}s`
+                default: props => `/${_.kebabCase(props.entity)}s`,
+                validate: value => !!value
             },
             {
                 type: 'input',
                 name: 'collection',
                 message: 'DB collection:',
-                default: props => `${_.snakeCase(props.entity)}s`
+                default: props => `${_.snakeCase(props.entity)}s`,
+                validate: value => !!value
             }
         ]);
         this.props = Object.assign(this.props, answer);

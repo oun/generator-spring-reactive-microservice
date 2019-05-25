@@ -15,31 +15,37 @@ module.exports = class extends Generator {
                 type: 'input',
                 name: 'appname',
                 message: 'Application name:',
-                default: this.appname
+                default: this.appname.toLowerCase(),
+                validate: value => !!value
             },
             {
                 type: 'input',
                 name: 'group',
                 message: 'Group:',
-                default: 'com.company.project'
+                default: 'com.company.project',
+                filter: value => value.toLowerCase(),
+                validate: value => !!value
             },
             {
                 type: 'input',
                 name: 'version',
                 message: 'Version:',
-                default: '0.0.1-SNAPSHOT'
+                default: '0.0.1-SNAPSHOT',
+                validate: value => !!value
             },
             {
                 type: 'input',
                 name: 'port',
                 message: 'Server port:',
-                default: '9080'
+                default: '9080',
+                validate: value => !!value
             },
             {
                 type: 'input',
                 name: 'dbname',
                 message: 'Database name:',
-                default: this.appname
+                default: props => props.appname,
+                validate: value => !!value
             },
             {
                 type: 'confirm',
@@ -51,13 +57,13 @@ module.exports = class extends Generator {
     }
 
     configuring() {
-        this.config.set('package', this.props.group + '.' + this.props.appname);
+        this.config.set('package', this.props.group + '.' + this.props.appname.toLowerCase());
     }
 
     writing() {
-        this.props.package = this.props.group + '.' + this.props.appname;
+        this.props.package = this.props.group + '.' + this.props.appname.toLowerCase();
         const packageDir = this.props.package.replace('.', '/');
-        const application = this.props.appname;
+        const appName = this.props.appname;
 
         this.fs.copyTpl(
             this.templatePath('build.gradle'),
@@ -72,14 +78,14 @@ module.exports = class extends Generator {
             this.templatePath('settings.gradle'),
             this.destinationPath(`settings.gradle`),
             {
-                name: application
+                name: appName
             }
         );
         this.fs.copyTpl(
             this.templatePath('src/main/resources/application.yml'),
             this.destinationPath(`src/main/resources/application.yml`),
             {
-                name: application,
+                name: appName,
                 port: this.props.port,
                 dbname: this.props.dbname
             }
@@ -121,6 +127,10 @@ module.exports = class extends Generator {
         this.fs.copy(
             this.templatePath('gradle/wrapper/gradle-wrapper.properties'),
             this.destinationPath(`gradle/wrapper/gradle-wrapper.properties`)
+        );
+        this.fs.copy(
+            this.templatePath('.gitignore'),
+            this.destinationPath('.gitignore')
         );
         if (this.props.scaffold) {
             this.composeWith(require.resolve('../service'));
