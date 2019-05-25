@@ -13,24 +13,18 @@ module.exports = class extends Generator {
             {
                 type: 'input',
                 name: 'entity',
-                message: 'Entity class'
-            },
-            {
-                type: 'input',
-                name: 'dto',
-                message: 'Dto class',
-                default: props => `${props.entity}Dto`
+                message: 'Entity:'
             },
             {
                 type: 'input',
                 name: 'path',
-                message: 'Api path',
+                message: 'Api path:',
                 default: props => `/${_.kebabCase(props.entity)}s`
             },
             {
                 type: 'input',
                 name: 'collection',
-                message: 'DB collection',
+                message: 'DB collection:',
                 default: props => `${_.snakeCase(props.entity)}s`
             }
         ]);
@@ -43,6 +37,7 @@ module.exports = class extends Generator {
         const mapper = `${this.props.entity}Mapper`;
         const service = `${this.props.entity}Service`;
         const controller = `${this.props.entity}Controller`;
+        const dto = `${this.props.entity}Dto`;
 
         this.fs.copyTpl(
             this.templatePath('src/main/java/package/controller/_Controller.java'),
@@ -53,7 +48,7 @@ module.exports = class extends Generator {
                 service: service,
                 path: this.props.path,
                 entity: this.props.entity,
-                dto: this.props.dto
+                dto: dto
             }
         );
         this.fs.copyTpl(
@@ -72,7 +67,7 @@ module.exports = class extends Generator {
                 repository: repository,
                 mapper: mapper,
                 entity: this.props.entity,
-                dto: this.props.dto
+                dto: dto
             }
         );
         this.fs.copyTpl(
@@ -91,15 +86,15 @@ module.exports = class extends Generator {
                 package: this.props.package,
                 mapper: mapper,
                 entity: this.props.entity,
-                dto: this.props.dto
+                dto: dto
             }
         );
         this.fs.copyTpl(
             this.templatePath('src/main/java/package/model/dto/_Dto.java'),
-            this.destinationPath(`src/main/java/${packageDir}/model/dto/${this.props.dto}.java`),
+            this.destinationPath(`src/main/java/${packageDir}/model/dto/${dto}.java`),
             {
                 package: this.props.package,
-                dto: this.props.dto
+                dto: dto
             }
         );
         this.fs.copyTpl(
