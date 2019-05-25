@@ -1,4 +1,5 @@
 const Generator = require('yeoman-generator');
+const _ = require('lodash');
 
 module.exports = class extends Generator {
     constructor(args, opts) {
@@ -15,7 +16,7 @@ module.exports = class extends Generator {
                 type: 'input',
                 name: 'appname',
                 message: 'Application name:',
-                default: this.appname.toLowerCase(),
+                default: _.kebabCase(this.appname.toLowerCase()),
                 validate: value => !!value
             },
             {
@@ -44,7 +45,7 @@ module.exports = class extends Generator {
                 type: 'input',
                 name: 'dbname',
                 message: 'Database name:',
-                default: props => props.appname,
+                default: props => _.snakeCase(props.appname),
                 validate: value => !!value
             },
             {
@@ -57,13 +58,13 @@ module.exports = class extends Generator {
     }
 
     configuring() {
-        this.config.set('package', this.props.group + '.' + this.props.appname.toLowerCase());
+        this.config.set('package', this.props.group + '.' + _.camelCase(this.props.appname).toLowerCase());
     }
 
     writing() {
-        this.props.package = this.props.group + '.' + this.props.appname.toLowerCase();
+        this.props.package = this.props.group + '.' + _.camelCase(this.props.appname).toLowerCase();
         const packageDir = this.props.package.replace('.', '/');
-        const appName = this.props.appname;
+        const appname = this.props.appname;
 
         this.fs.copyTpl(
             this.templatePath('build.gradle'),
@@ -78,14 +79,14 @@ module.exports = class extends Generator {
             this.templatePath('settings.gradle'),
             this.destinationPath(`settings.gradle`),
             {
-                name: appName
+                appname: appname
             }
         );
         this.fs.copyTpl(
             this.templatePath('src/main/resources/application.yml'),
             this.destinationPath(`src/main/resources/application.yml`),
             {
-                name: appName,
+                name: appname,
                 port: this.props.port,
                 dbname: this.props.dbname
             }
@@ -109,6 +110,30 @@ module.exports = class extends Generator {
             this.destinationPath(`src/main/java/${packageDir}/config/SwaggerConfig.java`),
             {
                 package: this.props.package
+            }
+        );
+        this.fs.copyTpl(
+            this.templatePath('Dockerfile'),
+            this.destinationPath('Dockerfile'),
+            {
+                appname: appname,
+                version: this.props.version
+            }
+        );
+        this.fs.copyTpl(
+            this.templatePath('k8s/deployment.yaml'),
+            this.destinationPath('k8s/deployment.yaml'),
+            {
+                servicename: appname,
+                image: `${this.props.group}/${appname}`,
+                dbname: this.props.dbname
+            }
+        );
+        this.fs.copyTpl(
+            this.templatePath('README.md'),
+            this.destinationPath('README.md'),
+            {
+                appname: appname
             }
         );
 

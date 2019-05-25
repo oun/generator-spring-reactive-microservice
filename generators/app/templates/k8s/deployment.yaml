@@ -1,0 +1,65 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: <%= servicename %>
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: <%= servicename %>
+  template:
+    metadata:
+      labels:
+        app: <%= servicename %>
+        version: v1
+    spec:
+      containers:
+        - name: <%= servicename %>
+          image: <%= image %>
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 20
+            periodSeconds: 20
+            failureThreshold: 3
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 20
+            periodSeconds: 20
+            successThreshold: 1
+            failureThreshold: 3
+            timeoutSeconds: 2
+          env:
+            - name: server.port
+              value: "8080"
+            - name: spring.data.mongodb.uri
+              value: "mongodb://mongo:27017/<%= dbname %>"
+          resources:
+            requests:
+              memory: "256Mi"
+            limits:
+              memory: "1Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: <%= servicename %>
+  labels:
+    app: <%= servicename %>
+spec:
+  ports:
+    - port: 8080
+      name: http
+  selector:
+    app: <%= servicename %>
