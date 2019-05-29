@@ -1,4 +1,4 @@
-# Generator Spring Reactive Microservice
+# Generator Spring Reactive Microservice [![Build Status](https://travis-ci.com/oun/generator-spring-reactive-microservice.svg?branch=master)](https://travis-ci.com/oun/generator-spring-reactive-microservice)
 
 Yeoman generator for creating Spring Reactive Microservice connecting to Mongodb.
 
