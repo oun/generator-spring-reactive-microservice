@@ -1,13 +1,19 @@
 {
   "name": "generator-spring-reactive-microservice",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Spring Boot WebFlux MongoDB Microservices Generator",
   "scripts": {},
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "generator",
+    "spring-reactive"
   ],
-  "author": "Worawat Wijarn",
-  "license": "ISC",
+  "homepage": "https://github.com/oun/generator-spring-reactive-microservice",
+  "author": {
+    "name": "Worawat Wijarn",
+    "url": "https://github.com/oun"
+  },
+  "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.11",
     "yeoman-generator": "^4.0.0"

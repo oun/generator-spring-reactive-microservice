@@ -133,7 +133,8 @@ module.exports = class extends Generator {
             this.templatePath('README.md'),
             this.destinationPath('README.md'),
             {
-                appname: appname
+                appname: appname,
+                port: this.props.port
             }
         );
 

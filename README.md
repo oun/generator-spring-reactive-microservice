@@ -2,7 +2,7 @@
 
 Yeoman generator for creating Spring Reactive Microservice connecting to Mongodb.
 
-## Technology
+## Features
 
 - Java 11
 - Spring WebFlux
@@ -12,13 +12,10 @@ Yeoman generator for creating Spring Reactive Microservice connecting to Mongodb
 - Lombok
 
 ## Installation
-```
-npm install -g yo
-npm install -g generator-spring-reactive-microservice
-```
+- Run `npm install -g yo` to install yeoman generator.
+- Run `npm install -g generator-spring-reactive-microservice`
 
 ## Running
 
-```
-yo spring-reactive-microservice
-```
+- Run `yo spring-reactive-microservice` to generate new app.
+- Run `yo spring-reactive-microservice:service` to generate scaffold CRUD service.
