@@ -35,7 +35,7 @@ module.exports = class extends Generator {
     }
 
     writing() {
-        const packageDir = this.props.package.replace('.', '/');
+        const packageDir = this.props.package.replace(/\./g, '/');
         const repository = `${this.props.entity}Repository`;
         const mapper = `${this.props.entity}Mapper`;
         const service = `${this.props.entity}Service`;
@@ -135,6 +135,18 @@ module.exports = class extends Generator {
             this.destinationPath(`src/main/java/${packageDir}/exception/EntityNotFoundException.java`),
             {
                 package: this.props.package
+            }
+        );
+        this.fs.copyTpl(
+            this.templatePath('src/test/java/package/controller/_ControllerIT.java'),
+            this.destinationPath(`src/test/java/${packageDir}/controller/${controller}IT.java`),
+            {
+                package: this.props.package,
+                controller: controller,
+                repository: repository,
+                path: this.props.path,
+                entity: this.props.entity,
+                dto: dto
             }
         );
     }

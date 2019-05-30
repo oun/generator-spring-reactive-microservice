@@ -39,6 +39,8 @@ public class <%= entity %>Service {
     }
 
     public Mono<Void> deleteById(String id) {
-        return repository.deleteById(id);
+        return repository.findById(id)
+                .switchIfEmpty(Mono.error(new EntityNotFoundException(<%= entity %>.class, id)))
+                .then(repository.deleteById(id));
     }
 }
