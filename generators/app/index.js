@@ -63,7 +63,7 @@ module.exports = class extends Generator {
 
     writing() {
         this.props.package = this.props.group + '.' + _.camelCase(this.props.appname).toLowerCase();
-        const packageDir = this.props.package.replace('.', '/');
+        const packageDir = this.props.package.replace(/\./g, '/');
         const appname = this.props.appname;
 
         this.fs.copyTpl(
