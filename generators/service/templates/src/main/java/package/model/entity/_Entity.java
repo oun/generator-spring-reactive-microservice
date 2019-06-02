@@ -12,7 +12,16 @@ import org.springframework.data.annotation.Version;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+<%_ if (hasLocalDateField) { _%>
+import java.time.LocalDate;
+<%_ } _%>
 import java.time.LocalDateTime;
+<%_ if (hasZonedDateTimeField) { _%>
+import java.time.ZonedDateTime;
+<%_ } _%>
+<%_ if (hasBigDecimalField) { _%>
+import java.math.BigDecimal;
+<%_ } _%>
 
 @Document(collection = "<%= collection %>")
 @Data
@@ -23,6 +32,9 @@ import java.time.LocalDateTime;
 public class <%= entity %> extends AggregateRoot implements Persistable<String> {
     @Id
     private String id;
+    <%_ for (field of fields) { _%>
+    private <%= field.type %> <%= field.name %>;
+    <%_ } _%>
 
     @Version
     private Long version;

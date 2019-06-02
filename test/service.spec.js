@@ -7,10 +7,12 @@ describe('Service generator', () => {
 
     before(() => {
       return helpers.run(path.join(__dirname, '../generators/service'))
+        .withArguments(['User'])
         .withPrompts({
-          entity: 'User',
-          path: '/users',
-          collection: 'users'
+          addField: true,
+          name: 'firstName',
+          type: 'String',
+          addField: false
         })
         .withLocalConfig({
           package: 'com.logicdee.sample.testapp'

@@ -7,13 +7,16 @@ describe('App generator', () => {
 
     before(() => {
       return helpers.run(path.join(__dirname, '../generators/app'))
+        .withArguments(['Book'])
         .withPrompts({
           appname: 'test-app',
           group: 'com.logicdee.sample',
           version: '0.0.1-SNAPSHOT',
           port: '9080',
           dbname: 'test',
-          scaffold: true
+          scaffold: true,
+          entity: 'Book',
+          addField: false
         })
         .withGenerators([
           [helpers.createDummyGenerator(), 'spring-reactive-microservice:service']
