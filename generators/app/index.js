@@ -100,6 +100,13 @@ module.exports = class extends Generator {
       }
     );
     this.fs.copyTpl(
+      this.templatePath('src/main/resources/logback-spring.xml'),
+      this.destinationPath(`src/main/resources/logback-spring.xml`),
+      {
+        package: this.props.package
+      }
+    );
+    this.fs.copyTpl(
       this.templatePath('src/main/java/package/Application.java'),
       this.destinationPath(`src/main/java/${packageDir}/Application.java`),
       {

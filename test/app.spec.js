@@ -36,6 +36,7 @@ describe('App generator', () => {
 
     it('generated resource files', () => {
       assert.file([`src/main/resources/application.yml`]);
+      assert.file([`src/main/resources/logback-spring.xml`]);
     });
   });
 });
