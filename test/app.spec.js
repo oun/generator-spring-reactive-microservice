@@ -19,7 +19,7 @@ describe('App generator', () => {
           addField: false
         })
         .withGenerators([
-          [helpers.createDummyGenerator(), 'spring-reactive-microservice:service']
+          [helpers.createDummyGenerator(), 'spring-reactive-microservice:entity']
         ])
     });
 

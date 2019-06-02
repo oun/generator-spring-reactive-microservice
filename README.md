@@ -18,4 +18,4 @@ Yeoman generator for creating Spring Reactive Microservice connecting to Mongodb
 ## Running
 
 - Run `yo spring-reactive-microservice` to generate new app.
-- Run `yo spring-reactive-microservice:service` to generate scaffold CRUD service.
+- Run `yo spring-reactive-microservice:entity {entity}` to generate entity and REST API.

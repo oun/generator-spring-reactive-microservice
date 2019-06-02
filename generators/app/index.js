@@ -167,7 +167,7 @@ module.exports = class extends Generator {
       this.destinationPath('.gitignore')
     );
     if (this.props.scaffold) {
-      this.composeWith(require.resolve('../service'), {arguments: [this.props.entity]});
+      this.composeWith(require.resolve('../entity'), {arguments: [this.props.entity]});
     }
   }
 };

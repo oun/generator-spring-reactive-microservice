@@ -6,7 +6,7 @@ describe('Service generator', () => {
   describe('generate scaffold service', () => {
 
     before(() => {
-      return helpers.run(path.join(__dirname, '../generators/service'))
+      return helpers.run(path.join(__dirname, '../generators/entity'))
         .withArguments(['User'])
         .withPrompts({
           addField: true,
