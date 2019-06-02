@@ -3,6 +3,7 @@ language: node_js
 node_js:
   - v10
   - v8
+if: tag IS present
 deploy:
   provider: npm
   email: "$NPM_EMAIL"
